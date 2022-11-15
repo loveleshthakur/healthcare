@@ -1,59 +1,96 @@
 package com.healthcare.entity;
 
-import java.math.BigInteger;
 import java.time.LocalDate;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Target;
 
 @Entity
+@Table(name ="patient")
 public class Patient {
 
 	@Id
     @GeneratedValue
-    private int id;
+    private int patientId;
     
 	private String name;
     private LocalDate dob ;
-    private String address;
-    private String phone;
-    private BigInteger aadharNo;
-	public int getId() {
-		return id;
+   
+    
+    @OneToMany(targetEntity = Phone.class )
+    @JoinColumn(name="patientId" ,nullable = false)
+    @Cascade({CascadeType.ALL})
+    private Set<Phone> phone;
+   
+    @OneToMany(targetEntity = GovernmentIdentity.class )
+    @JoinColumn(name="patientId" ,nullable = false)
+    
+    @Cascade({CascadeType.ALL})
+    private Set<GovernmentIdentity> govtIds;
+    
+    @OneToMany(targetEntity = Address.class )
+    @JoinColumn(name="patientId" ,nullable = false)
+    @Cascade({CascadeType.ALL})
+	private Set<Address> addresses;
+
+	public int getPatientId() {
+		return patientId;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public void setPatientId(int patientId) {
+		this.patientId = patientId;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public LocalDate getDob() {
 		return dob;
 	}
+
 	public void setDob(LocalDate dob) {
 		this.dob = dob;
-		System.out.println(dob);
 	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getPhone() {
+
+	public Set<Phone> getPhone() {
 		return phone;
 	}
-	public void setPhone(String phone) {
+
+	public void setPhone(Set<Phone>phone) {
 		this.phone = phone;
 	}
-	public BigInteger getAadharNo() {
-		return aadharNo;
+
+	public Set<GovernmentIdentity> getGovtIds() {
+		return govtIds;
 	}
-	public void setAadharNo(BigInteger aadharNo) {
-		this.aadharNo = aadharNo;
+
+	public void setGovtIds(Set<GovernmentIdentity> govtIds) {
+		this.govtIds = govtIds;
 	}
+
+	public Set<Address> getAddresses() {
+		return addresses;
 	}
+
+	public void setAddresses(Set<Address> addresses) {
+		this.addresses = addresses;
+	}
+    
+	
+	
+		}
