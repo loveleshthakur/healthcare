@@ -8,6 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Table(name="GovernmentIdentity")
 public class GovernmentIdentity {
@@ -19,15 +22,7 @@ public class GovernmentIdentity {
 	private long id;
 	
 
-	@ManyToOne(targetEntity = Patient.class)
-	private int patientId;
 	
-	public int getPatientId() {
-		return patientId;
-	}
-	public void setPatientId(int patientId) {
-		this.patientId = patientId;
-	}
 	public String getIdentityType() {
 		return identityType;
 	}
@@ -45,6 +40,10 @@ public class GovernmentIdentity {
 	}
 	public void setId(long id) {
 		this.id = id;
+	}
+	@Override
+	public String toString() {
+		return "GovernmentIdentity [identityType=" + identityType + ", identityNo=" + identityNo + ", id=" + id + "]";
 	}
 	
 }

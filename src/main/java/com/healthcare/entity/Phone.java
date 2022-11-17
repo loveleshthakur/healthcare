@@ -24,5 +24,9 @@ public class Phone {
 	public void setPhoenumber(long phoenumber) {
 		this.phoenumber = phoenumber;
 	}
+	@Override
+	public String toString() {
+		return "Phone [id=" + id + ", phoenumber=" + phoenumber + "]";
+	}
 	
 }

@@ -19,6 +19,8 @@ import org.hibernate.annotations.Target;
 @Table(name ="patient")
 public class Patient {
 
+	
+
 	@Id
     @GeneratedValue
     private int patientId;
@@ -34,7 +36,6 @@ public class Patient {
    
     @OneToMany(targetEntity = GovernmentIdentity.class )
     @JoinColumn(name="patientId" ,nullable = false)
-    
     @Cascade({CascadeType.ALL})
     private Set<GovernmentIdentity> govtIds;
     
@@ -91,6 +92,10 @@ public class Patient {
 		this.addresses = addresses;
 	}
     
-	
+	@Override
+	public String toString() {
+		return "Patient [patientId=" + patientId + ", name=" + name + ", dob=" + dob + ", phone=" + phone + ", govtIds="
+				+ govtIds + ", addresses=" + addresses + "]";
+	}
 	
 		}
